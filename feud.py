@@ -9,9 +9,10 @@ def show(i):
     global answer
 
     answer.append(tk.Label(ws, text=question[i][j-1].replace('_', ' ')
-                           + "      " + question[i][j]))
-    answer[-1].place(x=length // 3 + (length // 6) * ((i-1) // 5),
-                     y=45 + ((i-1) % 5) * 20)
+                           + "      " + question[i][j],
+                           font=("Arial", font_size)))
+    answer[-1].place(x=2 * length // 10 + (length // 3) * ((i-1) // 5),
+                     y=70 + ((i-1) % 5) * 40)
     ans_bt[i-1].destroy()
     ses_score += int(question[i][j])
     show_score(ses_score)
@@ -25,8 +26,9 @@ def show_score(ses_score):
     except BaseException:
         1 + 1
 
-    ses_score_lb = tk.Label(ws, text=str(ses_score), bg=bgcolour)
-    ses_score_lb.place(x=length // 2, y=30, anchor="center")
+    ses_score_lb = tk.Label(ws, text=str(ses_score), bg=bgcolour,
+                            font=("Arial", font_size))
+    ses_score_lb.place(x=length // 2, y=50, anchor="center")
 
 
 def add_right():
@@ -48,8 +50,9 @@ def add_right():
         1 + 1
 
     right_score += ses_score
-    right_score_lb = tk.Label(ws, text=str(right_score), pady=10, bg=bgcolour)
-    right_score_lb.place(x=length - 40, y=50, anchor="center")
+    right_score_lb = tk.Label(ws, text=str(right_score), bg=bgcolour,
+                              font=("Arial", font_size))
+    right_score_lb.place(x=length - 40, y=60, anchor="center")
 
 
 def add_left():
@@ -72,8 +75,9 @@ def add_left():
 
     left_score += ses_score
 
-    left_score_lb = tk.Label(ws, text=str(left_score), pady=10, bg=bgcolour)
-    left_score_lb.place(x=40, y=50, anchor="center")
+    left_score_lb = tk.Label(ws, text=str(left_score), bg=bgcolour,
+                             font=("Arial", font_size))
+    left_score_lb.place(x=40, y=60, anchor="center")
 
 
 def add_error():
@@ -203,17 +207,21 @@ def show_question():
                              anchor="center")
         return
 
-    left_lb = tk.Label(ws, text="Team Left", pady=15, padx=15, bg=bgcolour)
-    right_lb = tk.Label(ws, text="Team Right", pady=15, padx=15, bg=bgcolour)
+    left_lb = tk.Label(ws, text="Team Left", pady=15, padx=15, bg=bgcolour,
+                       font=("Arial", font_size))
+    right_lb = tk.Label(ws, text="Team Right", pady=15, padx=15, bg=bgcolour,
+                        font=("Arial", font_size))
 
-    left_lb.place(x=40, y=25, anchor="center")
-    right_lb.place(x=length - 40, y=25, anchor="center")
+    left_lb.place(x=10, y=25, anchor="w")
+    right_lb.place(x=length - 10, y=25, anchor="e")
 
     question_lb = tk.Label(ws, text=question[0][j-1].replace("_", ' '),
-                           pady=15, padx=10, bg=bgcolour)
+                           bg=bgcolour, font=("Arial", font_size))
 
-    left_score_lb = tk.Label(ws, text=str(left_score), pady=10, bg=bgcolour)
-    right_score_lb = tk.Label(ws, text=str(right_score), pady=10, bg=bgcolour)
+    left_score_lb = tk.Label(ws, text=str(left_score), bg=bgcolour,
+                             font=("Arial", font_size))
+    right_score_lb = tk.Label(ws, text=str(right_score), bg=bgcolour,
+                              font=("Arial", font_size))
 
     ans_bt = []
     answer = []
@@ -223,16 +231,17 @@ def show_question():
         while question[i][j] != '':
             ans_bt.append(tk.Button(ws,
                                     text=str(i),
-                                    command=lambda s=i: show(s)))
-            ans_bt[i-1].place(x=length // 3 + (length // 6) * ((i-1) // 5),
-                              y=45 + ((i-1) % 5) * 20)
+                                    command=lambda s=i: show(s),
+                                    font=("Arial", font_size)))
+            ans_bt[i-1].place(x=2 * length // 10 + (length // 3) * ((i-1) // 5),
+                              y=70 + ((i-1) % 5) * 40)
             i += 1
     except BaseException:
         1 + 1
 
-    question_lb.place(x=length // 2, y=10, anchor="center")
-    left_score_lb.place(x=40, y=50, anchor="center")
-    right_score_lb.place(x=length - 40, y=50, anchor="center")
+    question_lb.place(x=length // 2, y=20, anchor="center")
+    left_score_lb.place(x=40, y=60, anchor="center")
+    right_score_lb.place(x=length - 40, y=60, anchor="center")
     show_score(ses_score)
 
     nex = tk.Button(ws,
@@ -280,6 +289,8 @@ ws.geometry(str(length) + 'x' + str(height))
 ws.configure(bg=bgcolour)
 
 j = -1
+
+font_size = 20
 
 title = tk.Label(ws, text="Une famille en Or", font=("Arial", 40), bg=bgcolour)
 title.place(x=length // 2, y=height // 3, anchor="center")
